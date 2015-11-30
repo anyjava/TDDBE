@@ -7,3 +7,12 @@
 bin/
 build/
 logs/
+target/
+*~
+*.log
+*.ipr
+*.iws
+*.iml
+*.class
+*.bak
+.idea/
