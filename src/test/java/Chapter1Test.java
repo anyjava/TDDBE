@@ -1,3 +1,4 @@
+import com.woowahan.Franc;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 // TODO: hashCode()
 // TODO: Equal null
 // TODO: Equal Object
+// TODO: 5CHF * 2 = 10CHF
 public class Chapter1Test {
 
     @Test
@@ -28,5 +30,13 @@ public class Chapter1Test {
     public void testEquality() {
         assertTrue(new Dollar(5).equals(new Dollar(5)));
         assertFalse(new Dollar(5).equals(new Dollar(6)));
+    }
+
+    @Test
+    public void 프랑테스트() {
+        Franc franc = new Franc(5);
+
+        assertEquals(10, franc.times(2));
+        assertEquals(15, franc.times(3));
     }
 }
