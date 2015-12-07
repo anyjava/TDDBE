@@ -1,4 +1,6 @@
+import com.woowahan.Dollar;
 import com.woowahan.Franc;
+import com.woowahan.Money;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -14,12 +16,15 @@ import static org.junit.Assert.assertTrue;
 // TODO: hashCode()
 // TODO: Equal null
 // TODO: Equal Object
-// TODO: 5CHF * 2 = 10CHF
+// DONE: 5CHF * 2 = 10CHF
+// DONE: Dollar / Franc 중복 제거
+// TODO: 공용 equals
+// TODO: 공용 times
 public class Chapter1Test {
 
     @Test
     public void testMultiplication() {
-        Dollar five    = new Dollar(5);
+        Money five    = new Dollar(5);
 
         assertEquals(new Dollar(10), five.times(2));
 
@@ -34,9 +39,9 @@ public class Chapter1Test {
 
     @Test
     public void 프랑테스트() {
-        Franc franc = new Franc(5);
+        Money franc = new Franc(5);
 
-        assertEquals(10, franc.times(2));
-        assertEquals(15, franc.times(3));
+        assertEquals(new Franc(10), franc.times(2));
+        assertEquals(new Franc(15), franc.times(3));
     }
 }

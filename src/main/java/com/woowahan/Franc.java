@@ -1,11 +1,8 @@
 package com.woowahan;
 
-public class Franc {
+public class Franc extends Money {
 
     public Franc(int amount) {
-    }
-
-    public int times(int i) {
-        return 10;
+        super(amount);
     }
 }
