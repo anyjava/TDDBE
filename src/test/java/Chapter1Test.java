@@ -17,10 +17,10 @@ import static org.junit.Assert.assertTrue;
 // DONE: 5CHF * 2 = 10CHF
 // DONE: Dollar / Franc 중복 제거
 // DONE: 공용 equals
-// TODO: 공용 times
+// DONE: 공용 times
 // DONE: Dollar / Franc 비교하기
 // DONE: 통화?
-// TODO: testFrancMultiplication 제거
+// DONE: testFrancMultiplication 제거
 public class Chapter1Test {
 
     @Test
