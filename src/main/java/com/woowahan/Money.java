@@ -1,6 +1,6 @@
 package com.woowahan;
 
-public class Money {
+public class Money implements Expression {
 
     protected int amount;
     protected String currency;
@@ -34,4 +34,16 @@ public class Money {
     public String toString() {
         return this.currency + "==" + this.amount;
     }
+
+    public Expression plus(Money addend) {
+        return new Sum(this, addend);
+    }
+
+    @Override
+    public Money reduce(Bank bank, String to) {
+        int rate = bank.rate(this.currency(), to);
+
+        return new Money(this.amount/rate, to);
+    }
+
 }

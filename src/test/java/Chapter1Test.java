@@ -1,9 +1,10 @@
+import com.woowahan.Bank;
+import com.woowahan.Expression;
 import com.woowahan.Money;
+import com.woowahan.Sum;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 // TODO: 5$ + 10CHF = $10
 // DONE: $5 * 2
@@ -21,6 +22,11 @@ import static org.junit.Assert.assertTrue;
 // DONE: Dollar / Franc 비교하기
 // DONE: 통화?
 // DONE: testFrancMultiplication 제거
+// TODO: $5 + $5 = $10
+// TODO: $5 + $5 Money 반환하기
+// DONE: Bank.reduce(Money)
+// DONE: Money 에 대한 통화 변환을 수행하는 Reduce
+// DONE: Reduce(Bank, String)
 public class Chapter1Test {
 
     @Test
@@ -52,5 +58,64 @@ public class Chapter1Test {
     public void 통화() {
         assertEquals("USD", Money.dollar(1).currency());
         assertEquals("CHF", Money.franc(1).currency());
+    }
+
+    @Test
+    public void testSimpleAddition() {
+
+        Money five = Money.dollar(5);
+
+        Expression sum = five.plus(five);
+
+        Bank bank = new Bank();
+        Money reduced = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(10), reduced);
+    }
+
+    @Test
+    public void testPlusReturnsSum() {
+
+        Money five = Money.dollar(5);
+
+        Expression result = five.plus(five);
+
+        Sum sum = (Sum) result;
+
+        assertEquals(five, sum.augend);
+        assertEquals(five, sum.addend);
+    }
+
+    @Test
+    public void testReduceSum() {
+
+        Expression sum = new Sum(Money.dollar(3), Money.dollar(5));
+        Bank bank = new Bank();
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(8), result);
+    }
+
+    @Test
+    public void testReduceMoney() {
+        Bank bank = new Bank();
+        Money result = bank.reduce(Money.dollar(1), "USD");
+        assertEquals(Money.dollar(1), result);
+    }
+
+    @Test
+    public void testReduceMoneyDifferentCurrency() {
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Money result = bank.reduce(Money.franc(2), "USD");
+        assertEquals(Money.dollar(1), result);
+    }
+
+    @Test
+    public void testArrayEquals() {
+        assertArrayEquals(new Object[] { "abc" }, new Object[] {"abc"});
+    }
+
+    @Test
+    public void testIdentityRate() {
+        assertEquals(1, new Bank().rate("USD", "USD"));
     }
 }
