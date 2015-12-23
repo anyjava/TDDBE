@@ -1,3 +1,5 @@
+package com.woowahan;
+
 import com.woowahan.Bank;
 import com.woowahan.Expression;
 import com.woowahan.Money;
@@ -117,5 +119,16 @@ public class Chapter1Test {
     @Test
     public void testIdentityRate() {
         assertEquals(1, new Bank().rate("USD", "USD"));
+    }
+
+
+    @Test
+    public void testMixedAddition() {
+        Money fiveBucks = Money.dollar(5);
+        Money tenFrancs = Money.franc(10);
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Money result = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
+        assertEquals(Money.dollar(10), result);
     }
 }
